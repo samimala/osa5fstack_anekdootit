@@ -29,6 +29,8 @@ const reducer = (state = initialState, action) => {
       newState.sort((a,b)=>b.votes-a.votes)
       console.log('NewState:', newState)
       return newState
+    case 'NEWANECDOTE':
+      return state.concat(asObject(action.content))
     default:
   }
   return state

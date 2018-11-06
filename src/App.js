@@ -6,7 +6,14 @@ const actionFor = {
       type: 'VOTE',
       id: id
     }
+  },
+  newAnecdote(anecdote) {
+    return {
+      type: 'NEWANECDOTE',
+      content: anecdote
+    }
   }   
+   
 }
 
 class App extends React.Component {
@@ -17,6 +24,12 @@ class App extends React.Component {
     )
   }
 
+  addNew = (event) => {
+    event.preventDefault()
+    this.props.store.dispatch(
+      actionFor.newAnecdote(event.target.anecdote.value)
+    )
+  }
   render() {
     const anecdotes = this.props.store.getState()
     return (
@@ -34,9 +47,9 @@ class App extends React.Component {
           </div>
         )}
         <h2>create new</h2>
-        <form>
-          <div><input /></div>
-          <button>create</button> 
+        <form onSubmit={this.addNew}>
+          <div><input name="anecdote" /></div>
+          <button type="submit">Add new</button>
         </form>
       </div>
     )
