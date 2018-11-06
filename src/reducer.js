@@ -26,6 +26,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'VOTE':
       const newState = state.map(obj=>(action.id!==obj.id?obj:{...obj,votes: obj.votes+1}))
+      newState.sort((a,b)=>b.votes-a.votes)
       console.log('NewState:', newState)
       return newState
     default:
